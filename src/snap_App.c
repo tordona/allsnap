@@ -36,11 +36,16 @@ HWND			g_hwndAbout = NULL;
 UINT			g_version = 0x013100;
 
 
-#ifdef _WIN64
-TCHAR g_szClassName[] = TEXT("allSnapClassSizing64");	
+#if defined _M_ARM64
+TCHAR g_szClassName[] = TEXT("allSnapClassSizingARM64");	
+TCHAR g_szTitleName[] = TEXT("allSnapSizingARM64");
+TCHAR g_szMutexName[] =_T("IVAN_HECKMAN_ALLSNAP_MUTEX_SIZINGARM64");
+TCHAR g_szMutexNameB[] =_T("IVAN_HECKMAN_ALLSNAP_MUTEXB_SIZINGARM64");
+#elif defined _WIN64
+TCHAR g_szClassName[] = TEXT("allSnapClassSizing64");
 TCHAR g_szTitleName[] = TEXT("allSnapSizing64");
-TCHAR g_szMutexName[] =_T("IVAN_HECKMAN_ALLSNAP_MUTEX_SIZING64");
-TCHAR g_szMutexNameB[] =_T("IVAN_HECKMAN_ALLSNAP_MUTEXB_SIZING64");
+TCHAR g_szMutexName[] = _T("IVAN_HECKMAN_ALLSNAP_MUTEX_SIZING64");
+TCHAR g_szMutexNameB[] = _T("IVAN_HECKMAN_ALLSNAP_MUTEXB_SIZING64");
 #else
 TCHAR g_szClassName[] = TEXT("allSnapClassSizing");	
 TCHAR g_szTitleName[] = TEXT("allSnapSizing");

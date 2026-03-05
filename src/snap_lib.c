@@ -18,7 +18,13 @@
 #define BEEP
 #endif
 
-#ifdef _WIN64
+#if defined _M_ARM64
+#define ALLSNAP_SUBCLASS_ID (477524932)
+#define WM_TO_SEND (WM_USER + 13)
+#define WM_TO_GET (WM_USER + 12)
+#define SHARENAME "Shared64"
+#define SHARECMD "/section:Shared64,rws"
+#elif defined _WIN64
 #define ALLSNAP_SUBCLASS_ID (477524932)
 #define WM_TO_SEND (WM_USER + 13)
 #define WM_TO_GET (WM_USER + 12)
@@ -102,7 +108,16 @@ unsigned int		g_num_msgs_so_far;
 
 //Forward References
 LRESULT WINAPI CallWndProc(int nCode, WPARAM wParam, LPARAM lParam);
-#ifdef _WIN64
+#if defined _M_ARM64
+LRESULT APIENTRY SubclassProcARM64(
+	HWND hwnd,
+	UINT uMsg,
+	WPARAM wParam,
+	LPARAM lParam,
+	UINT_PTR uIdSubclass,
+	DWORD_PTR dwRefData
+);
+#elif defined _WIN64
 LRESULT APIENTRY SubclassProc64(
 	HWND hwnd,
     UINT uMsg,
@@ -174,7 +189,9 @@ BOOL WINAPI SnapCanUnHook(){
 
 void UnSubclass(HWND hWnd){
 	BOOL res = FALSE;
-#ifdef _WIN64
+#if defined _M_ARM64
+	res = RemoveWindowSubclass(g_subclassed_window, (SUBCLASSPROC)SubclassProcARM64, ALLSNAP_SUBCLASS_ID);
+#elif defined _WIN64
 	res = RemoveWindowSubclass(g_subclassed_window,(SUBCLASSPROC)SubclassProc64,ALLSNAP_SUBCLASS_ID);
 #else
 	res = RemoveWindowSubclass(g_subclassed_window,(SUBCLASSPROC)SubclassProc32,ALLSNAP_SUBCLASS_ID);
@@ -201,7 +218,17 @@ void Subclass(HWND hwnd){
 	g_moved_or_sized = FALSE;
 	g_subclassed_window = hwnd;
 	g_subclassing = TRUE;
-#ifdef _WIN64
+#if defined _M_ARM64
+	g_subclass_proc = (SUBCLASSPROC)SubclassProcARM64;
+
+	if (SetWindowSubclass(hwnd, (SUBCLASSPROC)SubclassProcARM64, ALLSNAP_SUBCLASS_ID, 0)) {
+		snapper_OnEnterSizeMove(g_subclassed_window);
+		DBG_MSG_PTR(g_hWnd_app, DBGMSG_SUBCLASS_NEW, 1);
+	}
+	else {
+		DBG_MSG_PTR(g_hWnd_app, DBGMSG_SUBCLASS_NEW, 0);
+	}
+#elif defined _WIN64
 	g_subclass_proc = (SUBCLASSPROC) SubclassProc64;
 
 	if (SetWindowSubclass(hwnd,(SUBCLASSPROC) SubclassProc64,ALLSNAP_SUBCLASS_ID,0)){
@@ -292,7 +319,9 @@ BOOL avoid_aero_snap(HWND hwnd){
 
 
 // Subclass procedure 
-#ifdef _WIN64
+#if defined _M_ARM64
+LRESULT APIENTRY SubclassProcARM64(
+#elif defined _WIN64
 LRESULT APIENTRY SubclassProc64(
 #else
 LRESULT APIENTRY SubclassProc32(

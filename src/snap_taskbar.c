@@ -93,7 +93,9 @@ BOOL ResetTaskbarIcon(void)
 
 	if(isEnabled()){
 		tip_id	= IDS_ENABLED_TIP;
-#ifdef _WIN64
+#if defined _M_ARM64
+		icon_id = IDI_TRAY_ENABLED_ARM64;
+#elif defined _WIN64
 		icon_id	=  IDI_TRAY_ENABLED_64;
 #else
 		icon_id = IDI_TRAY_ENABLED_32;
@@ -101,7 +103,9 @@ BOOL ResetTaskbarIcon(void)
 	}
 	else{
 		tip_id	= IDS_DISABLED_TIP;
-#ifdef _WIN64
+#if defined _M_ARM64
+		icon_id = IDI_TRAY_DISABLED_ARM64;
+#elif defined _WIN64
 		icon_id = IDI_TRAY_DISABLED_64;
 #else
 		icon_id = IDI_TRAY_DISABLED_32;

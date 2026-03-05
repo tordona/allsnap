@@ -56,12 +56,14 @@
 #define IDM_WHAT                        201
 #define IDI_PLAY                        208
 #define IDD_ADVANCED                    211
+#define IDI_TRAY_DISABLED_ARM64         214
 #define IDI_TRAY_DISABLED_64            215
 #define IDI_TRAY_ENABLED_32             217
 #define IDM_DEBUG                       218
 #define IDD_DEBUG                       219
 #define IDD_GRID                        220
 #define IDR_COPY                        228
+#define IDI_TRAY_ENABLED_ARM64          231
 #define IDI_TRAY_ENABLED_64             232
 #define IDI_TRAY_DISABLED_32            235
 #define IDC_WIN_THRESH                  1001

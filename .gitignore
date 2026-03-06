@@ -20,6 +20,7 @@ Output/
 [Rr]eleases/
 x64/
 x86/
+ARM64/
 build/
 bld/
 [Bb]in/

@@ -508,6 +508,8 @@
     <Image Include="speaker.ico" />
     <Image Include="play.ico" />
     <Image Include="snapit.ico" />
+    <Image Include="tray_disabled_arm64.ico" />
+    <Image Include="tray_enabled_arm64.ico" />
     <Image Include="x-click-but21.bmp" />
     <Image Include="tray_disabled.ico" />
     <Image Include="tray_disabled_32.ico" />

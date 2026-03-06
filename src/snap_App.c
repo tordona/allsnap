@@ -462,8 +462,6 @@ void ContextMenu(HWND hWnd){
 	CheckMenuItem(hContextMenu,ID_ENABLEWINDOWSNAPPING, 
 		(isEnabled())?MF_CHECKED:MF_UNCHECKED);
 
-	SetMenuDefaultItem(hContextMenu,IDM_SETTINGS,FALSE);
-
 	TrackPopupMenu(   hContextMenu,
 		 TPM_LEFTALIGN | TPM_BOTTOMALIGN,
 		 pt.x,

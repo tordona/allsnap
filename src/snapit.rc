@@ -72,12 +72,12 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_CAN
 //
 //
 
-IDD_ABOUT DIALOGEX 0, 0, 307, 42
+IDD_ABOUT DIALOGEX 0, 0, 243, 59
 STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About allSnap"
 FONT 9, "Segoe UI", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,193,24,50,14
+    DEFPUSHBUTTON   "OK",IDOK,183,39,50,14
 #if defined _M_ARM64
     LTEXT           "allSnap Version 1.60 - ARM64\nIvan Heckman && Anthony Lieuallen\nCopyright © 2002, 2025", IDC_STATIC, 47, 8, 133, 27
 #elif defined _WIN64
@@ -206,6 +206,9 @@ BEGIN
     POPUP "notify"
     BEGIN
         MENUITEM "&About allSnap",              IDM_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "&Help",                       9
+        MENUITEM SEPARATOR
         MENUITEM "&Settings...",                IDM_SETTINGS
         MENUITEM "&Enable Window Snapping",     ID_ENABLEWINDOWSNAPPING, CHECKED
         MENUITEM SEPARATOR
@@ -240,6 +243,9 @@ BEGIN
     POPUP "notify"
     BEGIN
         MENUITEM "&About allSnap",              IDM_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "&Help",                       9
+        MENUITEM SEPARATOR
         MENUITEM "&Settings...",                IDM_SETTINGS
         MENUITEM "&Enable Window Snapping",     ID_ENABLEWINDOWSNAPPING, CHECKED
         MENUITEM "&Open Debug console",         IDM_DEBUG
